@@ -23,12 +23,10 @@ pre-push:
       only:
         - run: test "$OS" = "Windows_NT"
       glob: "*.{c,cc,cpp,cxx}"
-      runner: cmd /c
-      script: clang-tidy.bat {push_files}
+      run: cmd /c clang-tidy.bat {push_files}
 
     - name: clang-tidy (Linux)
       only:
         - run: test "$(uname -s)" = "Linux"
       glob: "*.{c,cc,cpp,cxx}"
-      runner: bash
-      script: clang-tidy.sh {push_files}
+      run: bash clang-tidy.sh {push_files}
