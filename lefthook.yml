@@ -1,0 +1,34 @@
+pre-commit:
+  jobs:
+    - name: clang-format (Windows)
+      only:
+        - run: test "$OS" = "Windows_NT"
+      runner: cmd /c
+      script: .lefthook/pre-commit/clang-format.bat
+
+    - name: clang-format (Linux)
+      only:
+        - run: test "$(uname -s)" = "Linux"
+      runner: bash
+      script: .lefthook/pre-commit/clang-format.sh
+
+commit-msg:
+  jobs:
+    - name: cocogitto verify
+      run: cog verify --file "{1}"   # {1} = commit-msg 的 message 文件路径 :contentReference[oaicite:2]{index=2}
+
+pre-push:
+  jobs:
+    - name: clang-tidy (Windows)
+      only:
+        - run: test "$OS" = "Windows_NT"
+      glob: "*.{c,cc,cpp,cxx}"
+      runner: cmd /c
+      script: .lefthook/pre-push/clang-tidy.bat {push_files}
+
+    - name: clang-tidy (Linux)
+      only:
+        - run: test "$(uname -s)" = "Linux"
+      glob: "*.{c,cc,cpp,cxx}"
+      runner: bash
+      script: .lefthook/pre-push/clang-tidy.sh {push_files}
