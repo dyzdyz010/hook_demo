@@ -1,15 +1,6 @@
 pre-commit:
   jobs:
-    - name: clang-format (Windows)
-      only:
-        - run: test "$OS" = "Windows_NT"
-      runner: cmd /c
-      script: clang-format.bat
-
-    - name: clang-format (Linux)
-      only:
-        - run: test "$(uname -s)" = "Linux"
-      runner: bash
+    - name: clang-format
       script: clang-format.sh
 
 commit-msg:

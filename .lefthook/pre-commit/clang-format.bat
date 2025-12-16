@@ -1,4 +1,4 @@
-@echo off
+echo "clang-format.bat"
 setlocal EnableExtensions EnableDelayedExpansion
 
 where clang-format >nul 2>nul
