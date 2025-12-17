@@ -10,14 +10,5 @@ commit-msg:
 
 pre-push:
   jobs:
-    - name: clang-tidy (Windows)
-      only:
-        - run: test "$OS" = "Windows_NT"
-      glob: "*.{c,cc,cpp,cxx}"
-      run: cmd /c clang-tidy.bat {push_files}
-
-    - name: clang-tidy (Linux)
-      only:
-        - run: test "$(uname -s)" = "Linux"
-      glob: "*.{c,cc,cpp,cxx}"
+    - name: clang-tidy
       run: bash clang-tidy.sh {push_files}
