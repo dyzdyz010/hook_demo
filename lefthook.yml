@@ -11,4 +11,4 @@ commit-msg:
 pre-push:
   jobs:
     - name: clang-tidy
-      run: bash clang-tidy.sh {push_files}
+      run: sh {push_files}
